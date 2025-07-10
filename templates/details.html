@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Détails du Match</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Détails du Match</h1>
+
+    {% if match %}
+        <h2>{{ match.O1 }} vs {{ match.O2 }}</h2>
+        <p>Championnat: {{ match.CN }}</p>
+        <p>Heure: {{ match.S }}</p> {# Considerer formatter le timestamp si necessaire #}
+
+        <h3>Analyse et Prédiction:</h3>
+        <p>{{ prediction_text }}</p>
+
+        {% if safe_prediction_cote %}
+            <p style="color: green;">Prédiction la plus sûre (Cote: {{ safe_prediction_cote }})</p>
+        {% endif %}
+
+        <h3>Visualisation de la Prédiction:</h3>
+        <div style="width: 600px; height: 400px;">
+            <canvas id="predictionChart"></canvas>
+        </div>
+
+        <script>
+            const ctx = document.getElementById('predictionChart').getContext('2d');
+            const chartLabels = {{ chart_labels | tojson }};
+            const chartValues = {{ chart_values | tojson }};
+
+            const predictionChart = new Chart(ctx, {
+                type: 'bar', // Type de graphique : barres
+                data: {
+                    labels: chartLabels,
+                    datasets: [{
+                        label: 'Cotes', // Ou 'Probabilité', selon ce que vous visualisez
+                        data: chartValues,
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(255, 206, 86, 0.2)',
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        </script>
+
+    {% else %}
+        <p>Aucune donnée de match disponible.</p>
+    {% endif %}
+
+    <p><a href="{{ url_for('index') }}">Retour à la liste des matchs</a></p>
+
+</body>
+</html>
