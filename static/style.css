@@ -1,0 +1,50 @@
+body {
+    font-family: sans-serif;
+    margin: 20px;
+    line-height: 1.6;
+}
+
+h1, h2, h3 {
+    color: #333;
+}
+
+/* static/style.css */
+
+body {
+    font-family: sans-serif;
+    margin: 20px;
+    line-height: 1.6;
+    background-color: #f4f4f4; /* Exemple: couleur de fond */
+}
+
+h1, h2, h3 {
+    color: #333;
+}
+
+ul {
+    list-style: none; /* Supprimer les puces de la liste */
+    padding: 0;
+}
+
+li {
+    background-color: #fff; /* Couleur de fond pour chaque élément de la liste */
+    margin-bottom: 10px; /* Espace entre les éléments */
+    padding: 15px;
+    border-radius: 5px; /* Bords arrondis */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Ombre légère */
+}
+
+li a {
+    text-decoration: none; /* Supprimer le soulignement des liens */
+    color: #007bff; /* Couleur bleue pour les liens */
+    margin-left: 15px;
+}
+
+li a:hover {
+    text-decoration: underline; /* Souligner au survol */
+}
+
+/* Styles pour les matchs avec une prédiction sûre */
+li.safe-prediction {
+    border-left: 5px solid hsl(0, 100%, 50%)73%, 43%)100%, 50%)71%, 44%), 100%, 41%); /* Bordure verte à gauche */
+}
